@@ -57,7 +57,9 @@ export default {
 <!-- Content.vue -->
 <template>
     <!-- 通过v-bind 绑定到子组件message里 -->
-    <Hello :message='msg'></Hello>
+    <!-- 可以通过v-bind(:)动态绑定  也可以传定值-->
+    <!-- 目前通过msg变量传定值的没掌握  有解法的可以教教我 -->
+    <Hello :message='msg' aaa='msg'></Hello>
     <div>
         <h2>{{msg}}</h2>
         <button @click="msg='改变后的值'">改变Conten中的msg值</button>
@@ -78,18 +80,40 @@ export default {
     },
 }
 </script>
-
 <!-- Hello.vue 通过prop获取父组件传递的变量 -->
 <template>
     Hello.vue
-    {{message}}
+    <div>动态传递：{{message}}</div>
+    <div>静态传递：{{aaa}}</div>
 </template>
 
 <script>
     export default{
         // 子组件通过props接受父组件Content.vue传递的变量
-        props:['message']
+        props:['message', 'aaa']
     }
 </script>
 
+```
+
+- [prop类型验证](https://v3.cn.vuejs.org/guide/component-props.html#prop-%E9%AA%8C%E8%AF%81)
+```vue
+<template>
+    Hello.vue
+    <div>动态传递：{{message}}</div>
+    <div>静态传递：{{aaa}}</div>
+</template>
+
+<script>
+    export default{
+        // 子组件通过props接受父组件Content.vue传递的变量
+        props: {
+            message: {
+                type:String,
+                default: "你好", //如果上层不传该变量 则默认值为这个
+                required: true, //必传
+            }
+        }
+    }
+</script>
 ```

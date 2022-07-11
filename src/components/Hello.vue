@@ -1,11 +1,18 @@
 <template>
     Hello.vue
-    {{message}}
+    <div>动态传递：{{message}}</div>
+    <div>静态传递：{{aaa}}</div>
 </template>
 
 <script>
     export default{
         // 子组件通过props接受父组件Content.vue传递的变量
-        props:['message']
+        props: {
+            message: {
+                type:String,
+                default: "你好", //如果上层不传该变量 则默认值为这个
+                required: true, //必传
+            }
+        }
     }
 </script>
