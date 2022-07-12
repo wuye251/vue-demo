@@ -244,6 +244,47 @@ export default defineComponent({
 
 #### 具名插槽
 
+> 一个组件 有多个插槽， 复用的对于各个插槽准确使用， 那就给每个插槽起个名字即可
+
+```vue
+<!--Father.vue-->
+<template>
+  <Children>
+    这是父组件的内容
+    <template v-slot:slot1>slot1</template>
+    <template v-slot:slot2>slot2</template>
+    <template v-slot:slot3>slot3</template>
+    
+    <template v-slot:slot4>slot4</template>
+
+  </Children>
+</template>
+
+<script>
+import { defineComponent } from 'vue'
+import Children from '@/components/slot/Children'
+
+export default defineComponent({
+  components: {
+    Children
+  },
+})
+</script>
+
+<!--Children.vue-->
+<template>
+    <div> 
+        这是每个复用该组件都显示的
+        <slot></slot>
+        <slot name="slot1"></slot>
+        <slot name="slot2"></slot>
+        <slot name="slot3"></slot>
+    </div>
+</template>
+```
+
+
+
 #### 作用域插槽
 
 #### 插槽备用内容
