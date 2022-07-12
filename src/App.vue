@@ -1,22 +1,19 @@
 <template>
-  <Content></Content>
-  <Content></Content>
+  <Father></Father>
 </template>
 
 <script>
-import Content from './components/Content.vue'
 
-export default {
+import { defineComponent } from 'vue'
+import Father from '@/components/slot/Father' 
+export default defineComponent({
   name: 'App',
   components: {
-    Content,
+    Father,
   },
   data() {
     return {
     }
   },
-}
+})
 </script>
-
-<style>
-</style>
