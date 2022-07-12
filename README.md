@@ -242,9 +242,11 @@ export default defineComponent({
 </script>
 ```
 
-#### 具名插槽
+#### [具名插槽](https://v3.cn.vuejs.org/guide/component-slots.html#%E5%85%B7%E5%90%8D%E6%8F%92%E6%A7%BD)
 
 > 一个组件 有多个插槽， 复用的对于各个插槽准确使用， 那就给每个插槽起个名字即可
+>
+> **具名插槽只能在template中使用
 
 ```vue
 <!--Father.vue-->
@@ -283,14 +285,29 @@ export default defineComponent({
 </template>
 ```
 
+##### 渲染作用域
 
-
-#### 作用域插槽
+> 插槽当前在哪个组件中使用，只能使用当前组件内的变量
+>
+> **父级模板里的所有内容都是在父级作用域中编译的；子模板里的所有内容都是在子作用域中编译的。**
 
 #### 插槽备用内容
+
+> 当父组件使用了子组件，但没赋予其插槽内容时，  子组件的插槽默认内容将显示
+
+```vue
+<!--Father.vue-->
+<template v-slot:slot4></template>
+
+<!--Children.vue-->
+<!--页面将显示"这是一个备用插槽内容"-->
+<slot name="slot4">这是一个备用插槽内容</slot>
+```
+
+#### [作用域插槽](https://v3.cn.vuejs.org/guide/component-slots.html#%E4%BD%9C%E7%94%A8%E5%9F%9F%E6%8F%92%E6%A7%BD)
 
 
 
 # 附录
 - https://vue3.chengpeiquan.com/
-- https://v3.cn.vuejs.org/guide/introduction.html
+- https://v3.cn.vuejs.org/guide/introduction.htmlq

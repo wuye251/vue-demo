@@ -4,8 +4,8 @@
     <template v-slot:slot1>slot1</template>
     <template v-slot:slot2>slot2</template>
     <template v-slot:slot3>slot3</template>
-    
-    <template v-slot:slot4>slot4</template>
+
+    <template v-slot:slot4></template>
 
   </Children>
 </template>
