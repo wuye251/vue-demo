@@ -304,10 +304,96 @@ export default defineComponent({
 <slot name="slot4">这是一个备用插槽内容</slot>
 ```
 
-#### [作用域插槽](https://v3.cn.vuejs.org/guide/component-slots.html#%E4%BD%9C%E7%94%A8%E5%9F%9F%E6%8F%92%E6%A7%BD)
+#### [(常用)作用域插槽](https://v3.cn.vuejs.org/guide/component-slots.html#%E4%BD%9C%E7%94%A8%E5%9F%9F%E6%8F%92%E6%A7%BD)
+```vue
+<!--Child.vue-->
+<template>
+    <div> 
+        <slot :list="list">slot1</slot>
+    </div>
+</template>
 
+<script>
+    import { defineComponent } from 'vue'
+    
+    export default defineComponent({
+      data() {
+        return {
+          list: [1,2,3,4]
+        }
+      },
+    })
+</script>
+<!--Father.vue--->
+<Children>
+<template v-slot:default="slotProps">
+{{slotProps.list}}
+</template>    
+</Children>
+```
 
+## [provide/inject](https://v3.cn.vuejs.org/guide/component-provide-inject.html)
+
+> 用于两个绑定对应的组件之间传递数据， 子组件和父组件通信可以用prop/emits 但是如果嵌套太深，需要一级一级传递，这样会很麻烦， 所以出现了provide/inject
+
+```vue
+<!--父组件-->
+<template>
+  <Children></Children>
+</template>
+
+<script>
+import { defineComponent } from 'vue'
+import Children from '@/components/slot/Children'
+
+export default defineComponent({
+  components: {
+    Children
+  },
+  data() {
+    return {
+      message: "Father.vue message"
+    }
+  },
+  provide() {
+    return {
+      message: this.message  //父组件中的message传入其他组件
+    }
+  }
+})
+</script>
+<!--孙组件-->
+<template>
+    {{message}}
+</template>
+
+<script>
+    import { defineComponent } from 'vue'
+    export default defineComponent({
+        inject:['message'], //接受父组件的变量
+        created() {
+            console.log('inject message:', this.message)
+        }
+    })
+</script>
+```
+
+#### 响应性变化
+
+> 上面的处理时父组件数据不变情况下， 但如果父组件值更新， inject的组件中是不会更新的
+>
+> 所以我们可以用：
+>
+> ```js
+> provide() {
+>     return {
+>       todoLength: Vue.computed(() => this.todos.length)
+>     }
+>   }
+> ```
 
 # 附录
+
 - https://vue3.chengpeiquan.com/
-- https://v3.cn.vuejs.org/guide/introduction.htmlq
+- https://v3.cn.vuejs.org/guide/introduction.html
+- https://www.bilibili.com/video/BV1QA4y1d7xf

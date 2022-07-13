@@ -1,13 +1,6 @@
 <template>
-  <Children>
-    这是父组件的内容
-    <template v-slot:slot1>slot1</template>
-    <template v-slot:slot2>slot2</template>
-    <template v-slot:slot3>slot3</template>
-
-    <template v-slot:slot4></template>
-
-  </Children>
+  <div>父组件：{{message}}</div>
+  <Children></Children>
 </template>
 
 <script>
@@ -18,5 +11,15 @@ export default defineComponent({
   components: {
     Children
   },
+  data() {
+    return {
+      message: "Father.vue message"
+    }
+  },
+  provide() {
+    return {
+      message: this.message
+    }
+  }
 })
 </script>
