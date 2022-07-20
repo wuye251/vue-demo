@@ -1,9 +1,9 @@
-<<<<<<< HEAD
-# vue-demo
-=======
 # 基础
 - 语法糖： v-bind ：  v-on  @ 
 - v-model实现原理 1.v-bind绑定数据 2.@input事件更新数据变量
+- setup()
+  1. 在实例创建前生成，所以在setup里不能使用this
+  2. setup中声明变量, 需要用`const a = ref(0)`实现响应式修改  注意ref返回的是a.value所以访问值时需要`a.value`  模板中是默认解析到.value 不需要带.value
 # 组件化开发
 - 数据污染： 如果多次复用一个组件， 为防止数据变化影响其他地方的同一组件数据变化， 
 > data() 必须返回对象 而不是在外面先定义const对象后返回 这样会造成他们之间的数据污染
@@ -413,9 +413,14 @@ export default defineComponent({
 
 ## beforeUnmount/unmounted
 
+# 组合式API
+## setup()
+> vue3中  setup 取代了 beforeCreate和Created 换句话来说beforeCreate/Created里的工作，都可以在setup中完成
+> setup在实例创建前调用，所以不应该在setup中使用this
+> setup中修改变量为响应式时， 需要定义为`const a = ref(0)`
+
 # 附录
 
 - https://vue3.chengpeiquan.com/
 - https://v3.cn.vuejs.org/guide/introduction.html
 - https://www.bilibili.com/video/BV1QA4y1d7xf
->>>>>>> 89227deb80829cbafb227b6e4ee6c1c2bfc73690

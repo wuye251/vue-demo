@@ -1,16 +1,29 @@
 <template>
     <div>lifecycle</div>
-    <button @click="counter++">{{counter}}</button>
+    <button @click="test">{{counter}}</button>
 </template>
 
 <script>
-
+import {ref} from 'vue';
 export default {
     data() {
         return {
             counter: 0
         }
     },
+    setup() {
+        console.log('setup');
+        const counter = ref(0)
+        function test() {
+            counter.value++
+        }
+
+        return {
+            counter,
+            test,
+        }
+    },
+
     beforeCreate() {
         console.log('beforeCreate')
     },
