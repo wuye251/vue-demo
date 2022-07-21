@@ -418,9 +418,14 @@ export default defineComponent({
 > vue3中  setup 取代了 beforeCreate和Created 换句话来说beforeCreate/Created里的工作，都可以在setup中完成
 > setup在实例创建前调用，所以不应该在setup中使用this
 > setup中修改变量为响应式时， 需要定义为`const a = ref(0)`
+> 如果定义对象, 则用`const obj = reactive({name:xxx})`  
+> 解构上面obj 直接用name访问而不是obj.name访问时， `return {...obj}`即可 但不会触发响应式   响应式需要`return {toRef(...obj)}`
 
+## watch()
+> 修改时触发在setup中 `watch(val, (newVal, oldVal) => { ... }`
 # 附录
-
+HJNM  , MJNKHUBYGTVFRC5D6XE4SW3O/L.9
+IK,\
 - https://vue3.chengpeiquan.com/
 - https://v3.cn.vuejs.org/guide/introduction.html
 - https://www.bilibili.com/video/BV1QA4y1d7xf
